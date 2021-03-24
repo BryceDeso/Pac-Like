@@ -196,6 +196,7 @@
     <ClInclude Include="SeekBehavior.h" />
     <ClInclude Include="SeekPathBehavior.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -118,5 +118,8 @@
     <ClInclude Include="PathfindBehavior.h">
       <Filter>Engine Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>Pac Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

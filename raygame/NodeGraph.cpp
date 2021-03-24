@@ -4,11 +4,104 @@
 std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 {
 	// Find a path from start to end (The current implementation is obviously insufficient)
-	std::deque<Node*> path;
-	path.push_back(start);
-	path.push_back(start);
-	path.push_back(end);
-	return path;
+	//std::deque<Node*> path;
+	//path.push_back(start);
+	//path.push_back(start);
+	//path.push_back(end);
+	//return path;
+
+	//Check if the start or the goal pointer is null
+	if (!start || !end)
+	{
+		//return an empty list
+		std::deque<Node*> Null;
+		return Null;
+	}
+	//end if statement
+
+	//Create a node pointer that will act as an iterator for the graph
+	Node* currentNode = start;
+	//Create an open list
+	std::deque<Node*> openList;
+	//Create a closed list
+	std::deque<Node*> closedList;
+
+	//Add start to the open list
+	openList.push_front(start);
+
+	//Loop while the open list is not empty
+	while (!openList.empty())
+	{
+		//Sort the items in the open list by the g score
+		sort(openList);
+
+		//Set the iterator to be the first item in the open list
+		currentNode = openList.front();
+
+		//Check if the iterator is pointing to the goal node
+		if (currentNode == end)
+		{
+			//Return the new path found
+			return closedList;
+		}
+		//end if statement
+
+		//Pop the first item off the open list
+		openList.pop_front();
+		//Add the first item to the closed list
+		closedList.push_front(currentNode);
+
+		//Loop through all of the edges for the iterator
+		for (int i = 0; i < currentNode->connections.size(); i++)
+		{
+			//Create a node pointer to store the other end of the edge
+			Node* currentEdgeEnd = nullptr;
+
+			//Check if the iterator is on the second end of the node
+			if (currentNode == currentNode->previous)
+			{
+				//Set the edge end pointer to be the first end of the node
+				currentEdgeEnd = currentNode->connections.begin;
+			}
+			//Otherwise if the iterator is on the first end of the node...
+			else
+			{
+				//set the edge end pointer to be the second end of the node
+				currentEdgeEnd = currentNode->previous;
+			}
+			// end if statement
+
+			//Check if node at the end of the edge is in the closed list
+			if (!checkDeque(closedList, currentEdgeEnd))
+			{
+				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+				int gScore = currentNode->gScore + currentNode->connections[i].cost;
+
+				//Check if the node at the end of the edge is in the open list
+				if (!checkDeque(openList, currentEdgeEnd))
+				{
+					//Set the nodes g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = gScore;
+
+					//Set the nodes previous to be the iterator
+					currentEdgeEnd->previous = currentNode;
+
+					//Add the node to the open list
+					openList.push_front(currentEdgeEnd);
+				}
+				//Otherwise if the g score is less than the node at the end of the edge's g score...
+				else if (gScore < currentEdgeEnd->gScore)
+				{
+					//Set its g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = gScore;
+					//Set its previous to be the current node
+					currentEdgeEnd->previous = currentNode;
+				}
+				//end if statement
+			}
+		}
+		//end loop
+	}
 }
 
 void NodeGraph::drawGraph(Node* start)
@@ -49,5 +142,39 @@ void NodeGraph::drawConnectedNodes(Node* node, std::deque<Node*>* drawnList)
 		if (std::find(drawnList->begin(), drawnList->end(), e.target) == drawnList->end()) {
 			drawConnectedNodes(e.target, drawnList);
 		}
+	}
+}
+
+std::deque<NodeGraph::Node*> NodeGraph::sort(std::deque<Node*> deque)
+{
+	//Bubble sort
+	for (int i = 0; i < deque.size(); i++)
+	{
+		for (int j = deque.size() - 1; j > i; j--)
+		{
+			if (deque[j] < deque[j - 1])
+			{
+				Node* temp = deque[j];
+				deque[j] = deque[j - 1];
+				deque[j - 1] = temp;
+			}
+		}
+	}
+	return deque;
+}
+
+bool NodeGraph::checkDeque(std::deque<Node*> deque, Node* node)
+{
+	{
+		//For the size of a deque, check deque at the index of i. 
+		for (int i = 0; i < deque.size(); i++)
+		{
+			//if deque at the index of i is equal to node, return true.
+			if (deque[i] == node)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

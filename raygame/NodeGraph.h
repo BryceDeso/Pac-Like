@@ -52,5 +52,18 @@ namespace NodeGraph
 	/// <param name="node">The node to start</param>
 	/// <param name="drawnList">Nodes that have already been drawn</param>
 	void drawConnectedNodes(Node* node, std::deque<Node*>* drawnList = nullptr);
+
+	/// <summary>
+	/// Will use a bubble sort algorithm to sort a deque.
+	/// </summary>
+	/// <param name="deque">The deque you want to sort</param>
+	std::deque<NodeGraph::Node*> sort(std::deque<Node*> deque);
+
+	/// <summary>
+	/// Will iterate through a deque to check for a specific node.
+	/// </summary>
+	/// <param name="deque">The deque you want to check for a node</param>
+	/// <param name="node">The node you are looking for</param>
+	bool checkDeque(std::deque<Node*> deque, Node* node);
 };
 
