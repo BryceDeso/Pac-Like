@@ -3,8 +3,8 @@
 
 enum GhostState
 {
-	FLEE,
-	SEEK
+	SEEK,
+	FLEE
 };
 
 class FleeBehavior;

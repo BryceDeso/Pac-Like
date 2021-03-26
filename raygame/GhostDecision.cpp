@@ -41,7 +41,7 @@ void GhostDecision::update(Agent* agent, float deltaTime)
 		//You can set the wander force to be whatever value as you see fit but be sure to set seekforce to 0
 		if (!checkPlayerInSight(agent))
 		{
-			m_seek->setTarget(m_seek->getTarget());
+			m_seek->setTarget(m_seek->getTarget);
 		}
 		break;
 	case FLEE:
@@ -51,7 +51,6 @@ void GhostDecision::update(Agent* agent, float deltaTime)
 			//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0
 			m_flee->setTarget(ghost->getTarget());
 			m_flee->setForceScale(10);
-
 		}
 		break;
 	}
