@@ -1,6 +1,7 @@
 #pragma once
 #include "Agent.h"
 #include "SeekPathBehavior.h"
+#include "GhostDecision.h"
 
 class Maze;
 
@@ -29,6 +30,7 @@ public:
 	void setTarget(Actor* target);
 
 private:
+	GhostDecision* m_ghostDecision;
 	SeekPathBehavior* m_pathfindBehavior;
 	Maze* m_maze;
 

@@ -68,6 +68,12 @@
     <ClCompile Include="PathfindBehavior.cpp">
       <Filter>Engine Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FleeBehavior.cpp">
+      <Filter>Pac Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostDecision.cpp">
+      <Filter>Pac Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -121,5 +127,25 @@
     <ClInclude Include="SteeringBehavior.h">
       <Filter>Pac Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeBehavior.h">
+      <Filter>Pac Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostDecision.h">
+      <Filter>Pac Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="raygame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>Pac Header Files</Filter>
+    </None>
+    <None Include="Documentation.md">
+      <Filter>Pac Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "Maze.h"
 #include "Wall.h"
 #include "raylib.h"
+#include "Pac.h"
 
 Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze)
 	: Agent(x, y, Maze::TILE_SIZE / 2.5f, maxSpeed, maxSpeed, color)
@@ -9,6 +10,8 @@ Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze)
 	m_maze = maze;
 	m_pathfindBehavior = new SeekPathBehavior(maze);
 	m_pathfindBehavior->setColor(color);
+	m_ghostDecision = new GhostDecision();
+	addBehavior(m_ghostDecision);
 	addBehavior(m_pathfindBehavior);
 }
 

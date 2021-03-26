@@ -13,8 +13,8 @@
 * 
 *	Required modifications
 *		Implement NodeGraph::findPath.
-*		D)Create one or more decision-making behaviors using Behavior as the base class.
-*		Create one or more behaviors using PathfindBehavior as the base class.
+*		Create one or more decision-making behaviors using Behavior as the base class.(Done)
+*		Create one or more behaviors using PathfindBehavior as the base class.(Done)
 *	Recommended modifications
 *		Create any additional classes needed using Agent as a base.
 *		Add additional items to Maze::TileKey as needed for your plan.

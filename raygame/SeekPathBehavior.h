@@ -9,4 +9,3 @@ public:
 protected:
 	virtual MathLibrary::Vector2 findDestination(Agent* owner) override;
 };
-
