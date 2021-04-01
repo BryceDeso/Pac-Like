@@ -1,6 +1,6 @@
 #pragma once
-#include "Behavior.h"
-class SeekBehavior : public Behavior
+#include "SteeringBehavior.h"
+class SeekBehavior : public SteeringBehavior
 {
 public:
 	SeekBehavior() {}

@@ -17,6 +17,10 @@ namespace NodeGraph
 	{
 		MathLibrary::Vector2 position;
 
+		int color = 0xFFFFFFFF;
+
+		bool visited = false;
+
 		float gScore;
 		float hScore;
 		float fscore;
