@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ABDecisions.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Behavior.cpp" />
@@ -178,14 +179,19 @@
     <ClCompile Include="PursuePathBehavior.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeekBehavior.cpp" />
+    <ClCompile Include="SeekDecision.cpp" />
     <ClCompile Include="SeekPathBehavior.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WanderBehavior.cpp" />
+    <ClCompile Include="WanderDecision.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ABDecisions.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="Decision.h" />
     <ClInclude Include="FleeBehavior.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ghost.h" />
@@ -199,10 +205,13 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SeekBehavior.h" />
+    <ClInclude Include="SeekDecision.h" />
     <ClInclude Include="SeekPathBehavior.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WanderBehavior.h" />
+    <ClInclude Include="WanderDecision.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="raygame.rc" />

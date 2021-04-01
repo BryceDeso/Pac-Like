@@ -4,15 +4,21 @@
 #include "raylib.h"
 #include "Pac.h"
 
-Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze)
+Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze, bool switchBehaviors)
 	: Agent(x, y, Maze::TILE_SIZE / 2.5f, maxSpeed, maxSpeed, color)
 {
 	m_maze = maze;
 	m_pathfindBehavior = new SeekPathBehavior(maze);
 	m_pathfindBehavior->setColor(color);
 	m_ghostDecision = new GhostDecision();
-	addBehavior(m_ghostDecision);
-	addBehavior(m_pathfindBehavior);
+	if (switchBehaviors == true)
+	{
+		addBehavior(m_pathfindBehavior);
+	}
+	else
+	{
+		addBehavior(m_ghostDecision);
+	}
 }
 
 Ghost::~Ghost()

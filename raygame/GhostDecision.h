@@ -3,27 +3,26 @@
 
 enum GhostState
 {
-	SEEK,
-	FLEE
+	WANDER,
+	SEEK
 };
 
-class FleeBehavior;
+class WanderBehavior;
 class SeekBehavior;
 class SeekPathBehavior;
 
 class GhostDecision : public Behavior
 {
 public:
-	GhostDecision();
+	void start();
 
 	bool checkPlayerInSight(Agent* owner);
 
 	void update(Agent* agent, float deltaTime) override;
 
 private:
-	SeekPathBehavior* m_seekPathBehavior;
 	GhostState m_currentState;
-	FleeBehavior* m_flee;
+	WanderBehavior* m_wander;
 	SeekBehavior* m_seek;
 	float m_visionRadius = 100;
 };
