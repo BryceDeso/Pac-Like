@@ -3,104 +3,115 @@
 
 std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 {
-	// Find a path from start to end (The current implementation is obviously insufficient)
-	std::deque<Node*> path;
-	path.push_back(start);
-	path.push_back(start);
-	path.push_back(end);
-	return path;
-
-	////Check if the start or the goal pointer is null
-	//if (!start || !end)
-	//{
-	//	//return an empty list
-	//	return std::deque<Node*>();
-	//}
-	//	
-	////Create a node pointer that will be act as an iterator for the graph
-	//Node* currentNode = start;
-
-	////Create an open list
-	//std::deque<Node*> openList;
-	////Create a closed list
-	//std::deque<Node*> closedList;
-
-	////Add start to the open list
-	//openList.push_front(start);
-
-	////Loop while the open list is not empty
-	//while (!openList.empty())
-	//{
-	//	//Sort the items in the open list by the g score
-	//	sort(openList);
-
-	//	//Set the iterator to be the first item in the open list
-	//	openList.push_front(currentNode);
-
-	//	//Check if the iterator is pointing to the goal node
-	//	if (currentNode == end)
-	//	{
-	//		break;
-	//	}
-
-	//	//Pop the first item off the open list
-	//	openList.pop_front();
-
-	//	//Add the first item to the closed list
-	//	closedList.push_front(currentNode);
-
-	//	//Loop through all of the edges for the iterator
-	//	for (int i = 0; i < currentNode->connections.size(); i++)
-	//	{
-	//		//Create a node pointer to store the other end of the edge
-	//		Node* currentEdgeEnd = nullptr;
-	//		if (currentNode->connections[i].target != currentNode)
-	//		{
-	//			currentEdgeEnd = currentNode->connections[i].target;
-	//		}
-
-	//		//Check if node at the end of the edge is in the closed list
-	//		if (!checkDeque(closedList, currentEdgeEnd))
-	//		{
-	//			//Create an int and set it to be the g score of the iterator plus the cost of the edge
-	//			float gScore = currentNode->gScore + currentNode->connections[i].cost;
-	//			float hScore = (currentNode->position - end->position).getMagnitude();
-	//			float fScore = gScore + hScore;
-
-	//			//Check if the node at the end ofthe edge is in the open list
-	//			if (!checkDeque(openList, currentEdgeEnd))
-	//			{
-	//				//Set the nodes g score to be the g score calculated earlier
-	//				currentEdgeEnd->gScore = gScore;
-	//				currentEdgeEnd->hScore = hScore;
-	//				currentEdgeEnd->fscore = gScore + hScore;
-
-	//				//Set the nodes previous to be the iterator
-	//				currentEdgeEnd->previous = currentNode;
-
-	//				//Add the node to the open list
-	//				openList.push_front(currentEdgeEnd);
-	//			}
-	//			//Otherwise if the g score is less than the node at the end of the edge's g score...
-	//			else if (fScore < currentEdgeEnd->fscore)
-	//			{
-	//				//Set its g score to be the g score calculated earlier
-	//				currentEdgeEnd->gScore = gScore;
-	//				currentEdgeEnd->hScore = hScore;
-
-	//				//Set its previous to be the current node
-	//				currentEdgeEnd->previous = currentNode;
-	//			}
-	//		}
-	//	}
-	//}
+	/* Find a path from start to end (The current implementation is obviously insufficient)*/
 	//std::deque<Node*> path;
-	//while (currentNode != start)
-	//{
-	//	path.push_front(currentNode);
-	//	currentNode = currentNode->previous;
-	//}
+	//path.push_back(start);
+	//path.push_back(start);
+	//path.push_back(end);
 	//return path;
+
+	//Create a node pointer that points to the start node
+	//Create a node pointer that points to the goal node
+	Node* begin = start;
+	Node* goal = end;
+
+	//Check if the start or the goal pointer is null
+	if (!start || !goal)
+	{
+		std::deque<NodeGraph::Node*> path;
+		//return an empty list
+		return path;
+	}
+	//end if statement
+
+	//Set the start nodes color to be green
+	start->color = ColorToInt(BLUE);
+
+	//Create a node pointer that will act as an iterator for the graph
+	Node* currentNode = start;
+	//Create an open list
+	std::deque<Node*> openList;
+	//Create a closed list
+	std::deque<Node*> closedList;
+
+	//Add start to the open list
+	openList.push_front(start);
+
+	//Loop while the open list is not empty
+	while (!openList.empty())
+	{
+		//Sort the items in the open list by the g score
+		//sort(openList);
+
+		//Set the iterator to be the first item in the open list
+		currentNode = openList.front();
+
+		//Check if the iterator is pointing to the goal node
+		if (currentNode == goal)
+		{
+			//Mark the goal as being found by changing its color
+			goal->color = ColorToInt(GREEN);
+			//Return the new path found
+			std::deque<Node*> path;
+			while (currentNode != start)
+			{
+				path.push_front(currentNode);
+				currentNode = currentNode->previous;
+			}
+			return path;
+		}
+		//end if statement
+
+		//Pop the first item off the open list
+		openList.pop_front();
+		//Add the first item to the closed list
+		closedList.push_front(currentNode);
+
+		//Loop through all of the edges for the iterator
+		for (int i = 0; i < currentNode->connections.size(); i++)
+		{
+			//Create a node pointer to store the other end of the edge
+			Node* currentEdgeEnd = currentNode->connections[i].target;
+
+			//Check if node at the end of the edge is in the closed list
+			if (!checkDeque(closedList, currentEdgeEnd))
+			{
+				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+				int gScore = currentNode->gScore + currentNode->connections[i].cost;
+
+				//Check if the node at the end of the edge is in the open list
+				if (!checkDeque(openList, currentEdgeEnd))
+				{
+					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
+
+					//Set the nodes g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = gScore;
+
+					//Set the nodes previous to be the iterator
+					currentEdgeEnd->previous = currentNode;
+
+					//Add the node to the open list
+					openList.push_front(currentEdgeEnd);
+				}
+				//Otherwise if the g score is less than the node at the end of the edge's g score...
+				else if (gScore < currentEdgeEnd->gScore)
+				{
+					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
+					//Set its g score to be the g score calculated earlier
+					currentEdgeEnd->connections[i].cost = gScore;
+					//Set its previous to be the current node
+					currentEdgeEnd->previous = currentNode;
+				}
+				//end if statement
+			}
+		}
+		//end loop
+	}
+	//end loop
 }
 
 void NodeGraph::drawGraph(Node* start)
