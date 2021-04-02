@@ -45,6 +45,5 @@ private:
 	SeekPathBehavior* m_pathfindBehavior;
 	Maze* m_maze;
 
-	Actor* m_target = nullptr;
+	Actor* m_target;
 };
-

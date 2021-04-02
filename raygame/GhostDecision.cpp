@@ -2,14 +2,18 @@
 #include "SeekPathBehavior.h"
 #include "FleeBehavior.h"
 #include "SeekBehavior.h"
-#include "SeekPathBehavior.h"
 #include "WanderBehavior.h"
 #include "Ghost.h"
 
 
-void GhostDecision::start()
+GhostDecision::GhostDecision(SeekBehavior* seekBehavior, WanderBehavior* wanderBehavior, GhostState currentState)
 {
-	m_currentState = WANDER;
+	m_seek = seekBehavior;
+	m_wander = wanderBehavior;
+
+	m_currentState = currentState;
+
+	m_seek->setTarget(m_seek->getTarget());
 
 	m_seek->setForceScale(5);
 	m_wander->setForceScale(5);

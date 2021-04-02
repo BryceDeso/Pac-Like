@@ -9,12 +9,11 @@ enum GhostState
 
 class WanderBehavior;
 class SeekBehavior;
-class SeekPathBehavior;
 
 class GhostDecision : public Behavior
 {
 public:
-	void start();
+	GhostDecision(SeekBehavior* seekBehavior, WanderBehavior* wanderBehavior, GhostState currentState);
 
 	bool checkPlayerInSight(Agent* owner);
 

@@ -10,7 +10,9 @@ Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze, bool switc
 	m_maze = maze;
 	m_pathfindBehavior = new SeekPathBehavior(maze);
 	m_pathfindBehavior->setColor(color);
-	m_ghostDecision = new GhostDecision();
+	m_ghostDecision = new GhostDecision(m_seekBehavior, m_wanderBehavior, WANDER);
+
+	//Will add pathfinding behaviors if switchBehaviors is true, if else add decision behaviors.
 	if (switchBehaviors == true)
 	{
 		addBehavior(m_pathfindBehavior);
